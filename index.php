@@ -45,5 +45,5 @@ $end = microtime(true);
 
 echo ($end - $start) . ' seconds<hr />';
 
-var_dump($backoffice_faltantes_amadeus);
-var_dump($backoffice_faltantes_sabre);
+//var_dump($backoffice_faltantes_amadeus);
+//var_dump($backoffice_faltantes_sabre);
