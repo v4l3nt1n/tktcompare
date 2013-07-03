@@ -19,12 +19,12 @@ function cleaner($elem, $key, $fuente) {
     return $elem[$key];
 }
 
-function filtrito_amadeus($elem) {
+function filterAmadeus($elem) {
     global $backoffice_clean_data;
     return !in_array($elem['ticket'], $backoffice_clean_data);
 }
 
-function filtrito_sabre($elem) {
+function filterSabre($elem) {
     global $backoffice_clean_data;
     return !in_array($elem['boleto'], $backoffice_clean_data);
 }
@@ -36,10 +36,10 @@ $backoffice_clean_data = array_map('backoffice_cleaner', $backoffice);
 // fin clean data
 
 // obtener faltantes amadeus
-$backoffice_faltantes_amadeus = array_filter($amadeus, 'filtrito_amadeus');
+$backoffice_faltantes_amadeus = array_filter($amadeus, 'filterAmadeus');
 
 // obtener faltantes sabre
-$backoffice_faltantes_sabre = array_filter($sabre, 'filtrito_sabre');
+$backoffice_faltantes_sabre = array_filter($sabre, 'filterSabre');
 
 $end = microtime(true);
 

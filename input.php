@@ -1,30 +1,13 @@
 <?php
-
-/*
-$slider_pic=(!empty($_FILES['slider_pic']['name'])) ? time() . "_" .$_FILES['slider_pic']['name']: "";
-$slider_pic_tmp=$_FILES['slider_pic']['tmp_name'];
-
-
-	//valido el mime type del archivo subido
-	if(($_FILES['slider_pic']['type']=="image/gif" || 
-		$_FILES['slider_pic']['type']=="image/jpg" || 
-		$_FILES['slider_pic']['type']=="image/jpeg") &&
-		$_FILES['slider_pic']['size']<700000){
-			//valido que no haya errores en la carga del archivo
-			if($_FILES['slider_pic']['error']>0){
-				$error.="Error al subir imagen: ".$_FILES['slider_pic']['error']." -*-*- ";
-				$img_count.="1";
-			}else{
-				//si no hubo ningun tipo de error guardo el file en el directorio de productos
-				move_uploaded_file($slider_pic_tmp,"slider".$slider."/slider".$slider."_".$i.".jpg");
-			}
-	}else{
-		$error.="El archivo no es v&aacute;lido"." -*-*- ";;
-	}
-*/
-
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);
+
+//funcion que corta el string de derecha a izquierda dejando el largo especificado en $length
+function rpad($string,$length)
+{
+    $rpadded = substr($string, strlen($string)-$length,$length);
+    return $rpadded;
+}
 
 function orderFilesArray(&$file_array) {
     $ordered_files = array();
@@ -48,6 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	print_r($_FILES);
 	echo "</pre>";
 }
+
+//echo strpos("sabre1.csv",'.');
+echo substr("sabre1.csv",0, strpos("sabre1.csv",'.'))
+
+
 ?>
 
 <html>
