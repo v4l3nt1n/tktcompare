@@ -23,7 +23,7 @@ $start = microtime(true);
 
 
 // ------------------------ OOP STYLAH BEGIN ------------------------------------------------
-/*
+//*
 $tickets = array(
 		'sabre' => $sabre,
 		'amadeus' => $amadeus,
@@ -42,7 +42,7 @@ echo "</pre>";
 
 // ------------------------ OOP STYLAH END ------------------------------------------------
 
-//*
+/*
 
 //========================== PROCEDURAL STYLAH BEGIN ========================================0
 // Se limpian datos del backoffice, ya que solo necesitamos los campos de sabre y amadeus
