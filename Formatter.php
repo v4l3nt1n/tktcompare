@@ -3,13 +3,13 @@
 class Formatter 
 {
     // propiedades
-    private const SOURCE_SABRE = 'sabre';
-    private const SOURCE_AMADEUS = 'amadeus';
-    private const SOURCE_BACKOFFICE = 'backoffice';
+    const SOURCE_SABRE = 'sabre';
+    const SOURCE_AMADEUS = 'amadeus';
+    const SOURCE_BACKOFFICE = 'backoffice';
 
-    private const TICKET_KEY_SABRE = 'boleto';
-    private const TICKET_KEY_AMADEUS = 'ticket';
-    private const TICKET_KEY_BACKOFFICE = 'tkt';
+    const TICKET_KEY_SABRE = 'boleto';
+    const TICKET_KEY_AMADEUS = 'ticket';
+    const TICKET_KEY_BACKOFFICE = 'tkt';
 
     private $source_sabre;
     private $source_amadeus;
@@ -27,12 +27,12 @@ class Formatter
     public function __construct($tickets)
     {
         // se asignan las propiedades de cada fuente
-        $this->source_sabre = $tickets[SOURCE_SABRE];
-        $this->source_amadeus = $tickets[SOURCE_AMADEUS];
-        $this->source_backoffice = $tickets[SOURCE_BACKOFFICE];
+        $this->source_sabre = $tickets[Formatter::SOURCE_SABRE];
+        $this->source_amadeus = $tickets[Formatter::SOURCE_AMADEUS];
+        $this->source_backoffice = $tickets[Formatter::SOURCE_BACKOFFICE];
         
         // me quedo con la columna de tickets del backoffice
-        $this->cleaner_key = TICKET_KEY_BACKOFFICE;
+        $this->cleaner_key = Formatter::TICKET_KEY_BACKOFFICE;
         $this->backoffice_clean_data = array_map(array($this,'cleaner'), $this->source_backoffice);
         
         // quita de 0 de izquierda fuente backoffice
@@ -63,9 +63,9 @@ class Formatter
 
     public function getMissing()
     {
-        $this->filter_key = TICKET_KEY_SABRE;
+        $this->filter_key = Formatter::TICKET_KEY_SABRE;
         $this->missing_sabre = array_filter($this->source_sabre,array($this,'filter'));
-        $this->filter_key = TICKET_KEY_AMADEUS;
+        $this->filter_key = Formatter::TICKET_KEY_AMADEUS;
         $this->missing_amadeus = array_filter($this->source_amadeus,array($this,'filter'));
         return array(
                 'missing_sabre'=>$this->missing_sabre,

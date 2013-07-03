@@ -11,7 +11,7 @@
 
 $sabre = array();
 $amadeus = array();
-for ($i=0; $i < 5000; $i++) { 
+for ($i=0; $i < 10; $i++) { 
 	$sabre[$i] = array(
 		'boleto' => '253344000' . $i,
 		'fuente' => 'sabre'

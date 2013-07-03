@@ -1,5 +1,8 @@
 <?php
 ini_set('memory_limit', -1);
+ini_set('display_errors', 1); 
+error_reporting(E_ALL);
+
 
 include 'data.php';
 
@@ -32,14 +35,14 @@ $tickets = array(
 
 
 
-$Comparador = new Formatter($tickets);
-$faltantes = $Comparador->getMissing();
-/*
-echo "<pre>";
-print_r($faltantes);
-echo "</pre>";
-//*/
+$Comp = new Formatter($tickets);
+$missing = $Comp->getMissing();
 
+echo "<pre>";
+print_r($missing);
+echo "</pre>";
+
+//*/
 // ------------------------ OOP STYLAH END ------------------------------------------------
 
 /*
