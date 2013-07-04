@@ -35,7 +35,7 @@ $tickets = array(
 
 
 
-$Comp = new Formatter($tickets);
+$Comp = new Comparer($tickets);
 $missing = $Comp->getMissing();
 
 echo "<pre>";
