@@ -7,9 +7,9 @@ class Comparer
     const SOURCE_AMADEUS = 'amadeus';
     const SOURCE_BACKOFFICE = 'backoffice';
 
-    const TICKET_KEY_SABRE = 'boleto';
-    const TICKET_KEY_AMADEUS = 'ticket';
-    const TICKET_KEY_BACKOFFICE = 'tkt';
+    const TICKET_KEY_SABRE = 2;
+    const TICKET_KEY_AMADEUS = 'C';
+    const TICKET_KEY_BACKOFFICE = 'E';
 
     private $source_sabre;
     private $source_amadeus;
@@ -34,9 +34,6 @@ class Comparer
         // me quedo con la columna de tickets del backoffice
         $this->cleaner_key = Comparer::TICKET_KEY_BACKOFFICE;
         $this->backoffice_clean_data = array_map(array($this,'cleaner'), $this->source_backoffice);
-        
-        // quita de 0 de izquierda fuente backoffice
-        $this->backoffice_clean_data = array_map(array($this,'rpad'), $this->backoffice_clean_data);
     }
 
     private function cleaner($elem)
@@ -47,18 +44,6 @@ class Comparer
     private function filter($elem)
     {      
         return !in_array($elem[$this->filter_key], $this->backoffice_clean_data);
-    }
-    
-    private function rpad($elem)
-    {
-        $length = 10;
-        return substr($elem, strlen($elem)-$length,$length);
-
-    }
-
-    private function dismissCnjTkts($elem)
-    {
-        return true;
     }
 
     public function getMissing()
@@ -72,6 +57,4 @@ class Comparer
                 'missing_amadeus'=>$this->missing_amadeus,
             );
     }
-
-
 }

@@ -14,7 +14,7 @@ class SourceHandler
     const TICKET_KEY_AMADEUS = 'ticket';
     const TICKET_KEY_BACKOFFICE = 'tkt';
 
-    private $files_array;
+    private $files_array = array();
 
     private $ready_array_sabre = array();
     private $ready_array_amadeus = array();
@@ -24,8 +24,9 @@ class SourceHandler
 
     function __construct($files)
     {
-        $this->$files_array = $this->orderFilesArray($files);
-        $this->determineSource();
+        //$this->files_array = $this->orderFilesArray($files);
+        $this->orderFilesArray($files);
+        //$this->determineSource();
 
     }
 
@@ -40,7 +41,6 @@ class SourceHandler
                 $ordered_files[$i][$key] = $file_array['files'][$key][$i];
             }
         }
-
         return $ordered_files;
     }
 
