@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
     <hr>    
     <?php
+        echo "<h3>MISSING</h3>";
         if (!empty($missing)) {
             echo "<table border='1'>";
             foreach ($missing['missing_sabre'] as $key => $ticket) {
@@ -45,7 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo "</tr>";
             }
             echo "</table>";
+        }
+        
+        echo "<hr>";
+        echo "<h3>VOIDS</h3>";
 
+        if (!empty($voids)) {
             echo "<table border='1'>";
             foreach ($voids['void_sabre'] as $key => $ticket) {
                 echo "<tr>";
