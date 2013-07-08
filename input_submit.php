@@ -18,10 +18,23 @@ include 'Classes/PHPExcel/IOFactory.php';
 set_include_path(get_include_path() . PATH_SEPARATOR . 'Classes/');
 
 $source_handler = new SourceHandler($_FILES);
-$voids = $source_handler->getVoids();
 $fuentes = $source_handler->getSources();
+/*
+echo "<pre>";
+print_r($fuentes);
+echo "</pre>";
+
+die();
+*/
+
 $Comp = new Comparer($fuentes);
 $missing = $Comp->getMissing();
+$voids = $Comp->getVoids();
+
+//echo "<pre>";
+//print_r($missing);
+//echo "</pre>";
+
 
 unset($source_handler);
 unset($Comp);

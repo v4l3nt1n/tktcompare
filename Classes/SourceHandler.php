@@ -5,24 +5,15 @@ class SourceHandler
     // propiedades
     const CSV_DELIMITER = ';';
 
-    const VOID_SABRE = "void_sabre";
-    const VOID_AMADEUS = 'void_amadeus';
-
-    const VOID_COL_SABRE = "DESCRIPCION";
-    const VOID_COL_AMADEUS = 'L';
-    const VOID_COL_BACKOFFICE = "";
-
-    const VOID_FIELD_SABRE = "VOID";
-    const VOID_FIELD_AMADEUS = 'CANX';
-    const VOID_FIELD_BACKOFFICE = "";
-
     const SOURCE_SABRE = 'sabre';
     const SOURCE_AMADEUS = 'amadeus';
     const SOURCE_BACKOFFICE = 'backoffice';
 
     const FILTER_COL_SABRE = 'FECHA';
-    const FILTER_COL_AMADEUS = 'C';
+    const FILTER_COL_AMADEUS = 'TICKET';
     const FILTER_COL_BACKOFFICE = 'B';
+
+    const CANN_COL_AMADEUS = 'TRNC';
 
     const TICKET_COL_SABRE = 'TICKET';
     const TICKET_COL_BACKOFFICE = 'E';
@@ -33,16 +24,11 @@ class SourceHandler
     private $ready_array_amadeus = array();
     private $ready_array_backoffice = array();
 
-    private $ready_void_sabre = array();
-    private $ready_void_amadeus = array();
-    private $ready_void_backoffice = array();
-
     private $rpad_string_length = 10;
 
     private $ticket_col;
     private $col_cleaner_cols;
     private $cleaner_source;
-    private $void_col;
 
     private $keys_array_sabre = array(
             'FECHA',
@@ -99,6 +85,22 @@ class SourceHandler
             'HORA',
             'DESCRIPCION',
     );
+
+    private $keys_array_amadeus = array(
+        'SEQNRO',
+        'CIA',
+        'TICKET',
+        'TOTAL',
+        'TAX',
+        'FEE',
+        'COMISION',
+        'FOP',
+        'PAX',
+        'SINE',
+        'PNR',
+        'TRNC',
+    );
+
     // metodos
 
     function __construct($files)
@@ -154,9 +156,7 @@ class SourceHandler
     private function processSabre()
     {
         // asigno keys para luego elegirlas
-        foreach ($this->ready_array_sabre as $key => $row) {
-            $this->ready_array_sabre[$key] = array_combine($this->keys_array_sabre, $row);
-        }        
+        $this->ready_array_sabre = $this->keyAssign($this->ready_array_sabre,$this->keys_array_sabre);
         // quito las rows con las cabecereas
         $this->cleaner_source = SourceHandler::SOURCE_SABRE;
         $this->ready_array_sabre = array_filter($this->ready_array_sabre,array($this,'rowCleaner'));
@@ -170,6 +170,8 @@ class SourceHandler
 
     private function processAmadeus()
     {
+        // asigno keys para luego elegirlas
+        $this->ready_array_amadeus = $this->keyAssign($this->ready_array_amadeus,$this->keys_array_amadeus);
         // quito las rows con las cabecereas
         $this->cleaner_source = SourceHandler::SOURCE_AMADEUS;
         $this->ready_array_amadeus = array_filter($this->ready_array_amadeus,array($this,'rowCleaner'));
@@ -183,16 +185,6 @@ class SourceHandler
         // quito el 0 a la izquierda del vstour
         $this->ticket_col = SourceHandler::TICKET_COL_BACKOFFICE;
         $this->ready_array_backoffice = array_map(array($this,'rpad'), $this->ready_array_backoffice);
-    }
-
-    private function processVoids()
-    {
-        $this->void_col = SourceHandler::VOID_COL_SABRE;
-        $this->cleaner_source = SourceHandler::SOURCE_SABRE;
-        $this->ready_void_sabre = array_filter($this->ready_array_sabre,array($this,'voidCleaner'));
-        $this->void_col = SourceHandler::VOID_COL_AMADEUS;
-        $this->cleaner_source = SourceHandler::SOURCE_AMADEUS;
-        $this->ready_void_amadeus = array_filter($this->ready_array_amadeus,array($this,'voidCleaner'));
     }
 
     private function xlsToArray($inputFileName,$source)
@@ -227,6 +219,15 @@ class SourceHandler
         }
     }
 
+    private function keyAssign($elem, $keys)
+    {
+        foreach ($elem as $key => $row) {
+            $elem[$key] = array_combine($keys, $row);
+        }
+
+        return $elem;
+    }
+
     private function rpad($elem)
     {
         $length = $this->rpad_string_length;
@@ -240,31 +241,10 @@ class SourceHandler
         return $elem;
     }
 
-    private function voidCleaner($elem)
-    {
-        if ($this->cleaner_source == SourceHandler::SOURCE_SABRE) {
-            if ($elem[$this->void_col] != SourceHandler::VOID_FIELD_SABRE) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        if ($this->cleaner_source == SourceHandler::SOURCE_AMADEUS) {
-            if ($elem[$this->void_col] != SourceHandler::VOID_FIELD_AMADEUS) {
-                return false;
-            } else {
-                return true;
-            }
-        }        
-    }
-
     private function rowCleaner($elem)
     {
         if ($this->cleaner_source == SourceHandler::SOURCE_SABRE) {
-            if ($elem[SourceHandler::FILTER_COL_SABRE] == 'FECHA' ||
-                $elem[SourceHandler::VOID_COL_SABRE] == SourceHandler::VOID_FIELD_SABRE
-                ) {
+            if ($elem[SourceHandler::FILTER_COL_SABRE] == 'FECHA') {
                 return false;
             }else{
                 return true;
@@ -274,9 +254,7 @@ class SourceHandler
         if ($this->cleaner_source == SourceHandler::SOURCE_AMADEUS) {
             if ($elem[SourceHandler::FILTER_COL_AMADEUS] == '' ||
                 $elem[SourceHandler::FILTER_COL_AMADEUS] == 'DOC NUMBER' ||
-                $elem[SourceHandler::VOID_COL_AMADEUS] == 'CANN' ||
-                $elem[SourceHandler::VOID_COL_AMADEUS] == SourceHandler::VOID_FIELD_AMADEUS
-                )
+                $elem[SourceHandler::CANN_COL_AMADEUS] == 'CANN')
             {
                 return false;
             }else{
@@ -310,22 +288,5 @@ class SourceHandler
                 SourceHandler::SOURCE_AMADEUS => $this->ready_array_amadeus,
                 SourceHandler::SOURCE_BACKOFFICE => $this->ready_array_backoffice,
             );
-    }
-    public function getVoids()
-    {
-        $this->processVoids();
-        /*
-        return array(
-                SourceHandler::VOID_SABRE => $this->ready_void_sabre,
-                SourceHandler::VOID_AMADEUS => $this->ready_void_amadeus,                
-            );
-        */
-        $voids = array(
-                SourceHandler::VOID_SABRE => $this->ready_void_sabre,
-                SourceHandler::VOID_AMADEUS => $this->ready_void_amadeus,                
-            );
-        echo "<pre>";
-        print_r($voids);
-        echo "</pre>";
     }
 }
