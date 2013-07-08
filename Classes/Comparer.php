@@ -7,7 +7,7 @@ class Comparer
     const SOURCE_AMADEUS = 'amadeus';
     const SOURCE_BACKOFFICE = 'backoffice';
 
-    const TICKET_KEY_SABRE = 2;
+    const TICKET_KEY_SABRE = 'TICKET';
     const TICKET_KEY_AMADEUS = 'C';
     const TICKET_KEY_BACKOFFICE = 'E';
 

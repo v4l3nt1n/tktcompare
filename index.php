@@ -45,6 +45,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo "</tr>";
             }
             echo "</table>";
+
+            echo "<table border='1'>";
+            foreach ($voids['void_sabre'] as $key => $ticket) {
+                echo "<tr>";
+                    foreach ($ticket as $key => $value) {
+                        echo "<td>".$value."</td>";
+                    }
+                echo "</tr>";
+            }
+            echo "</table>";
+            echo "<hr>";
+            echo "<table border='1'>";
+            foreach ($voids['void_amadeus'] as $key => $ticket) {
+                echo "<tr>";
+                    foreach ($ticket as $key => $value) {
+                        echo "<td>".$value."</td>";
+                    }
+                echo "</tr>";
+            }
+            echo "</table>";
         }
     ?>
 </body>
