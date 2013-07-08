@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php
         echo "<h3>MISSING</h3>";
         if (!empty($missing)) {
+            echo "<p>Sabre</p>";
             echo "<table border='1'>";
             foreach ($missing['missing_sabre'] as $key => $ticket) {
                 echo "<tr>";
@@ -37,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             echo "</table>";
             echo "<hr>";
+            echo "<p>Amadeus</p>";
             echo "<table border='1'>";
             foreach ($missing['missing_amadeus'] as $key => $ticket) {
                 echo "<tr>";
@@ -46,12 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo "</tr>";
             }
             echo "</table>";
+        } else {
+            echo "<p>No hay Faltantes.</p>";
         }
         
         echo "<hr>";
         echo "<h3>VOIDS</h3>";
-
         if (!empty($voids)) {
+            echo "<p>Sabre</p>";
             echo "<table border='1'>";
             foreach ($voids['void_sabre'] as $key => $ticket) {
                 echo "<tr>";
@@ -62,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             echo "</table>";
             echo "<hr>";
+            echo "<p>Amadeus</p>";
             echo "<table border='1'>";
             foreach ($voids['void_amadeus'] as $key => $ticket) {
                 echo "<tr>";
@@ -71,6 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo "</tr>";
             }
             echo "</table>";
+        } else {
+            echo "<p>No hay Voids.</p>";
         }
     ?>
 </body>
