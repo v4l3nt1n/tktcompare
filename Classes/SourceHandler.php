@@ -100,6 +100,19 @@ class SourceHandler
         'PNR',
         'TRNC',
     );
+    private $keys_choose_amadeus = array(
+        'CIA',
+        'TICKET',
+        'TOTAL',
+        'TAX',
+        'FEE',
+        'COMISION',
+        'FOP',
+        'PAX',
+        'SINE',
+        'PNR',
+        'TRNC',
+    );
 
     // metodos
 
@@ -175,6 +188,9 @@ class SourceHandler
         // quito las rows con las cabecereas
         $this->cleaner_source = SourceHandler::SOURCE_AMADEUS;
         $this->ready_array_amadeus = array_filter($this->ready_array_amadeus,array($this,'rowCleaner'));
+        // me quedo con las columnas indicadas en key_choose_amadeus
+        $this->col_cleaner_cols = $this->keys_choose_amadeus;
+        $this->ready_array_amadeus = array_map(array($this,'colCleaner'),$this->ready_array_amadeus);
     }
 
     private function processBackoffice()
