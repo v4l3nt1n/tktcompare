@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     echo "<td>".$value."</td>";
                                 }
                             echo "</tr>";
-                        }                        
+                        }
                     }
                     ?>
         			</tbody>
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <td>PNR</td>
                             <td>Transacción</td>
                         </tr>
-                    </thead>                    
+                    </thead>
                     <tbody>
                     <?php
                     if (!empty($voids['void_amadeus'])){

@@ -270,7 +270,8 @@ class SourceHandler
         if ($this->cleaner_source == SourceHandler::SOURCE_AMADEUS) {
             if ($elem[SourceHandler::FILTER_COL_AMADEUS] == '' ||
                 $elem[SourceHandler::FILTER_COL_AMADEUS] == 'DOC NUMBER' ||
-                $elem[SourceHandler::CANN_COL_AMADEUS] == 'CANN')
+                $elem[SourceHandler::CANN_COL_AMADEUS] == 'CANN' ||
+                $elem[SourceHandler::CANN_COL_AMADEUS] == 'RFND' )
             {
                 return false;
             }else{
