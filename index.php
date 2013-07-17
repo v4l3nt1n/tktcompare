@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <a href="http://sci.tucanotours.com.ar" target="_blank"><img id="sci" alt="Sistema de Consolidación Integrada" src="img/sci.png" width="250"/></a>
                 </div>
             </div>
-            <img alt="" src="img/line_red.png" />
+            <div class="separador"><img alt="" src="img/line_red.png"/></div>
             <form id="buscar" method="post" action="" enctype="multipart/form-data">
                 <input name="files[]" id="files" type="file" multiple="" />
                 <input type="submit" value="Comparar" class="btn primary" >

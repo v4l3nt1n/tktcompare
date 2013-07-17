@@ -57,6 +57,12 @@ body {
 	border: 0px;
 }
 
+.separador {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #buscar {
 	clear: both;
 	width: 424px;
@@ -85,7 +91,7 @@ body {
 	color: #666666;
 }
 
-#sabre, #sabrevoid, #amadeus, #amadeusvoid table {
+#sabre, #sabrevoid, #amadeus, #amadeusvoid {
 	min-height: 300px;
 }
 
@@ -118,11 +124,11 @@ table {
 
 table td {
 	width: 150px;
+	border-bottom: 1px solid #666666;
 }
 
 thead td {
 	height: 25px;
-	/*width: 150px;*/
 	font-weight: bold;
 	font-size: 10px;
 	text-align: center;
