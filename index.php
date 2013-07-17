@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		        <input name="files[]" id="files" type="file" multiple="" />
 		        <input type="submit" value="Comparar" class="btn primary" >
 	    	</form>
-            <a name="sabre"></a>
         	<div id="sabre">
-        		<table width="800" align="center" cellspacing="0" cellpadding="0" class="shadow_inset" >
+                <a name="sabre" class="title">SABRE</a>
+        		<table align="center" cellspacing="0" cellpadding="0" class="shadow_inset" >
         			<thead>
         				<tr>
         					<td>Fecha</td>
@@ -75,9 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         			</tbody>
         		</table>
         	</div>
-        	<a name="sabrevoid"></a>
         	<div id="sabrevoid">
-        		<table width="800" align="center" cellspacing="0" cellpadding="0" border="0" class="shadow_inset" >
+                <a name="sabrevoid" class="title">SABRE VOID</a>
+        		<table align="center" cellspacing="0" cellpadding="0" border="0" class="shadow_inset" >
         			<thead>
         				<tr>
                             <td>Fecha</td>
@@ -115,9 +115,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </tbody>
                 </table>
             </div>
-            <a name="amadeus"></a>
             <div id="amadeus">
-                <table width="800" align="center" cellspacing="0" cellpadding="0" border="0" class="shadow_inset" >
+                <a name="amadeus" class="title">AMADEUS</a>
+                <table align="center" cellspacing="0" cellpadding="0" border="0" class="shadow_inset" >
                     <thead>
                         <tr>
                             <td>Aerolínea</td>
@@ -146,9 +146,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </tbody>
                 </table>
             </div>
-            <a name="amadeusvoid"></a>
             <div id="amadeusvoid">
-                <table width="800" align="center" cellspacing="0" cellpadding="0" border="0" class="shadow_inset" >
+                <a name="amadeusvoid" class="title">AMADEUS VOID</a>
+                <table cellspacing="0" cellpadding="0" border="0" class="shadow_inset" >
                     <thead>
                         <tr>
                             <td>Aerolínea</td>
