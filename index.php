@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
         <div id="wrapper">
-		<div id="nav">
+        <div id="nav">
             <a href="#arriba" class="btn verda">Buscar</a> 
             <a href="#sabre" class="btn verda">Sabre</a> 
             <a href="#sabrevoid" class="btn verda">Sabre Void</a> 
@@ -30,26 +30,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <a href="http://sci.tucanotours.com.ar" target="_blank"><img id="sci" alt="Sistema de Consolidación Integrada" src="img/sci.png" width="250"/></a>
                 </div>
             </div>
-    		<img alt="" src="img/line_red.png" />
-			<form id="buscar" method="post" action="" enctype="multipart/form-data">
-		        <input name="files[]" id="files" type="file" multiple="" />
-		        <input type="submit" value="Comparar" class="btn primary" >
-	    	</form>
-        	<div id="sabre">
+            <img alt="" src="img/line_red.png" />
+            <form id="buscar" method="post" action="" enctype="multipart/form-data">
+                <input name="files[]" id="files" type="file" multiple="" />
+                <input type="submit" value="Comparar" class="btn primary" >
+            </form>
+            <div id="sabre">
                 <a name="sabre" class="title">SABRE</a>
-        		<table align="center" cellspacing="0" cellpadding="0" class="shadow_inset" >
-        			<thead>
-        				<tr>
-        					<td>Fecha</td>
-        					<td>Aerolínea</td>
-        					<td>Ticket</td>
-        					<td>PNR</td>
-        					<td>Nombre</td>
-        					<td>Apellido</td>
-        					<td>Ruta</td>
-        					<td>Clase</td>
-        					<td>TourCode</td>
-        					<td>Impuestos</td>
+                <table align="center" cellspacing="0" cellpadding="0" class="shadow_inset" >
+                    <thead>
+                        <tr>
+                            <td>Aerolínea</td>
+                            <td>Ticket</td>
+                            <td>PNR</td>
+                            <td>Pasajero</td>
+                            <td>Facial</td>
+                            <td>Impuestos</td>
                             <td>Comisión</td>
                             <td>Total TKT</td>
                             <td>Monto Cash</td>
@@ -60,17 +56,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <td>Sine</td>
                             <td>Hora</td>
                             <td>Descripción</td>
-        				</tr>
-        			</thead>
-        			<tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
                     <?php
+                    if (!empty($missing['missing_sabre'])){
                         foreach ($missing['missing_sabre'] as $key => $ticket) {
                             echo "<tr>";
                                 foreach ($ticket as $key => $value) {
                                     echo "<td>".$value."</td>";
                                 }
                             echo "</tr>";
-                        }
+                        }                        
+                    }
                     ?>
         			</tbody>
         		</table>
@@ -80,15 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         		<table align="center" cellspacing="0" cellpadding="0" border="0" class="shadow_inset" >
         			<thead>
         				<tr>
-                            <td>Fecha</td>
                             <td>Aerolínea</td>
                             <td>Ticket</td>
                             <td>PNR</td>
-                            <td>Nombre</td>
-                            <td>Apellido</td>
-                            <td>Ruta</td>
-                            <td>Clase</td>
-                            <td>TourCode</td>
+                            <td>Pasajero</td>
+                            <td>Facial</td>
                             <td>Impuestos</td>
                             <td>Comisión</td>
                             <td>Total TKT</td>
@@ -104,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         			</thead>
         			<tbody>
                     <?php
+                    if (!empty($voids['void_sabre'])){
                         foreach ($voids['void_sabre'] as $key => $ticket) {
                             echo "<tr>";
                                 foreach ($ticket as $key => $value) {
@@ -111,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 }
                             echo "</tr>";
                         }
+                    }
                     ?>
                     </tbody>
                 </table>
@@ -135,6 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </thead>
                     <tbody>
                     <?php
+                    if (!empty($missing['missing_amadeus'])){
                         foreach ($missing['missing_amadeus'] as $key => $ticket) {
                             echo "<tr>";
                                 foreach ($ticket as $key => $value) {
@@ -142,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 }
                             echo "</tr>";
                         }
+                    }
                     ?>
                     </tbody>
                 </table>
@@ -166,6 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </thead>                    
                     <tbody>
                     <?php
+                    if (!empty($voids['void_amadeus'])){
                         foreach ($voids['void_amadeus'] as $key => $ticket) {
                             echo "<tr>";
                                 foreach ($ticket as $key => $value) {
@@ -173,6 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 }
                             echo "</tr>";
                         }
+                    }
                     ?>
         			</tbody>
         		</table>
