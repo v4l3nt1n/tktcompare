@@ -92,7 +92,7 @@ body {
 }
 
 #sabre, #sabrevoid, #amadeus, #amadeusvoid {
-	min-height: 300px;
+	margin-bottom: 40px;
 }
 
 #sabre thead {
