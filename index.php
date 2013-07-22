@@ -31,9 +31,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="separador"><img alt="" src="img/line_red.png"/></div>
+            <?php
+                if ($error) {
+                    echo '<div id="buscar" align="center" class="verda" style="color: #ed2d2d;">';
+                    echo $error;
+                    echo '</div>';
+                }
+            ?>
             <form id="buscar" method="post" action="" enctype="multipart/form-data">
                 <input name="files[]" id="files" type="file" multiple="" />
                 <input type="submit" value="Comparar" class="btn primary" >
+                <a href="instructivo_tktcompare.pdf" target="_blank" class="btn small primary" align="center" title="Instructivo"><strong> ? </strong></a>
             </form>
             <div id="sabre">
                 <a name="sabre" class="title">SABRE</a>

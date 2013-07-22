@@ -145,6 +145,7 @@ class SourceHandler
             $name = substr($name,0, strpos($name,'.')-1);
             $inputFileName = $file['tmp_name'];
 
+            /*
             if ($name === 'sabre') {
                 $this->csvToArray($inputFileName);
             }
@@ -155,7 +156,24 @@ class SourceHandler
 
             if ($name === 'backoffice') {
                 $this->xlsToArray($inputFileName, $name);
-            }        
+            }
+            //*/
+            switch ($name)
+            {
+                case 'sabre':
+                    $this->csvToArray($inputFileName);
+                    break;
+                case 'amadeus':
+                    $this->xlsToArray($inputFileName, $name);
+                    break;
+                case 'backoffice':
+                    $this->xlsToArray($inputFileName, $name);
+                    break;
+                default:
+                    $error = "Uno de los archivos no tiene el nombre correcto. Repita el proceso.";
+                    throw new Exception($error);
+                    break;
+            }
         }
     }
 
