@@ -141,38 +141,16 @@ class SourceHandler
     private function determineSource()
     {
         foreach ($this->files_array as $key => $file) {
-            $name = $file['name'];
-            $name = substr($name,0, strpos($name,'.')-1);
+            $name = strtolower($file['name']);
+
             $inputFileName = $file['tmp_name'];
 
-            /*
-            if ($name === 'sabre') {
+            if (strpos($name, SourceHandler::SOURCE_SABRE) !== FALSE) {
                 $this->csvToArray($inputFileName);
             }
 
-            if ($name === 'amadeus') {
-                $this->xlsToArray($inputFileName, $name);
-            }
-
-            if ($name === 'backoffice') {
-                $this->xlsToArray($inputFileName, $name);
-            }
-            //*/
-            switch ($name)
-            {
-                case 'sabre':
-                    $this->csvToArray($inputFileName);
-                    break;
-                case 'amadeus':
-                    $this->xlsToArray($inputFileName, $name);
-                    break;
-                case 'backoffice':
-                    $this->xlsToArray($inputFileName, $name);
-                    break;
-                default:
-                    $error = "Uno de los archivos no tiene el nombre correcto. Repita el proceso.";
-                    throw new Exception($error);
-                    break;
+            if (strpos($name, SourceHandler::SOURCE_AMADEUS) !== FALSE) {
+                $this->xlsToArray($inputFileName, SourceHandler::SOURCE_AMADEUS);
             }
         }
     }
