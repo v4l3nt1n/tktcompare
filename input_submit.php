@@ -10,8 +10,6 @@ include 'Classes/PHPExcel/IOFactory.php';
 
 set_include_path(get_include_path() . PATH_SEPARATOR . 'Classes/');
 
-$error = 'sarasa';
-
 try {
 	$source_handler = new SourceHandler($_FILES);
 	$fuentes = $source_handler->getSources();	
