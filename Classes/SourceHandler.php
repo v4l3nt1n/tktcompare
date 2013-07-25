@@ -58,8 +58,8 @@ class SourceHandler
             'BASE',
             'SIGN',
             'HORA',
+            'PCC',
             'DESCRIPCION',
-            'CORTETRF1',
             'CORTETRF2',
     );
     private $keys_choose_sabre = array(
