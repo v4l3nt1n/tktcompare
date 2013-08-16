@@ -166,8 +166,12 @@ class SourceHandler
     {
         // asigno keys para luego elegirlas
         $this->ready_array_sabre = $this->keyAssign($this->ready_array_sabre,$this->keys_array_sabre);
-        // quito las rows con las cabecereas
         $this->cleaner_source = SourceHandler::SOURCE_SABRE;
+        //chequeo que los archivos se hayan cargado correctamente y no tengan errores de formato
+        if (!empty($this->ready_array_sabre)) {
+            $this->checkFiles($this->ready_array_sabre);
+        }
+        // quito las rows con las cabecereas
         $this->ready_array_sabre = array_filter($this->ready_array_sabre,array($this,'rowCleaner'));
         // quito los tickets en conjuncion
         $this->ticket_col = SourceHandler::TICKET_COL_SABRE;
@@ -228,6 +232,15 @@ class SourceHandler
             $this->ready_array_sabre = array_merge($this->ready_array_sabre, $csvarray);
             # Close the File.
             fclose($handle);
+        }
+    }
+
+    private function checkFiles($array)
+    {       
+        if ($this->cleaner_source === SourceHandler::SOURCE_SABRE) {
+            if (!$this->ready_array_sabre[0]) {
+                throw new Exception("El archivo CSV contiene errores. Revise si es necesario regenerarlo.", 1);                
+            }
         }
     }
 
